@@ -12,12 +12,14 @@ class ProjectsController extends Controller
 {
 
     private $validations =  [
-        'title'         => 'required|string|min:5|max:100',
-        'type_id'       => 'required|integer|exists:types,id',
-        'url_image'     => 'required|url|max:200',
-        'description'   => 'required|string',
-        'creation_date' => 'required|date',
-        'url_repo'      => 'required|url|max:200',
+        'title'          => 'required|string|min:5|max:100',
+        'type_id'        => 'required|integer|exists:types,id',
+        'url_image'      => 'required|url|max:200',
+        'description'    => 'required|string',
+        'creation_date'  => 'required|date',
+        'url_repo'       => 'required|url|max:200',
+        'technologies'   => 'nullable|array',
+        'technologies.*' => 'integer|exists:technologies,id',
     ];
 
     private $validation_messages = [
