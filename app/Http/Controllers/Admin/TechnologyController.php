@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class TechnologyController extends Controller
 {
+
+    // Validations
+    protected $validationRules = [
+        'name' => 'required|max:40|unique:technologies',
+    ];
+
+    protected $validationMessages = [
+        'required'   => ':attribute is a required field',
+        'max'        => ':attribute must be less than :max characters long',
+        'unique'     => 'The technology name :attribute has already been taken.',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +37,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
     }
 
     /**
@@ -37,7 +48,15 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate($this->validationRules, $this->validationMessages);
+
+        $technology = new Technology();
+
+        $technology->name = $request->name;
+
+        $technology->save();
+
+        return redirect()->route('admin.technologies.index')->with('create_success', $technology);
     }
 
     /**
