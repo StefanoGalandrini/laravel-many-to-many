@@ -43,6 +43,26 @@
 				@enderror
 			</div>
 
+
+			{{-- Add checkboxes for project technologies --}}
+			<div class="mb-3">
+				<h4 class="fw-bold">Technologies:</h4>
+				@foreach ($technologies as $tech)
+					<div class="mb-3 form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="tech{{ $tech->id }}" value="{{ $tech->id }}"
+							name="technologies[]">
+						<label class="form-check-label" for="tech{{ $tech->id }}">{{ $tech->name }}</label>
+					</div>
+				@endforeach
+
+				{{-- @error('type_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror --}}
+			</div>
+
+
 			<div class="mb-3">
 				<label for="url_image" class="form-label">URL Image</label>
 				<input type="url" class="form-control @error('url_image') is-invalid @enderror" id="url_image" name="url_image"

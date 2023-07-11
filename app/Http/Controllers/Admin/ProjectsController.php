@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -46,8 +47,9 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        $types = Type::all();
-        return view('admin.projects.create', ['types' => $types]);
+        $types          = Type::all();
+        $technologies   = Technology::all();
+        return view('admin.projects.create', ['types' => $types, 'technologies' => $technologies]);
     }
 
     /**
@@ -75,6 +77,8 @@ class ProjectsController extends Controller
         $newProject->url_repo       = $data['url_repo'];
 
         $newProject->save();
+
+        $newProject->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.show', ['project' => $newProject]);
     }
