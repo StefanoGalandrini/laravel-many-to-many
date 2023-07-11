@@ -30,6 +30,9 @@ Route::middleware(['auth', 'verified'])
 
         // Routes for Types
         Route::resource('types', TypeController::class);
+
+        // Routes for Technologies
+        Route::resource('technologies', TechnologyController::class);
     });
 
 
