@@ -33,6 +33,10 @@ class TypesTableSeeder extends Seeder
                 'name' => 'Full stack',
                 'description' => 'Progetti che coinvolgono sia lo sviluppo front-end che back-end, richiedendo una comprensione completa delle tecniche di sviluppo. (Projects involving both front-end and back-end development, requiring a comprehensive understanding of development techniques.)',
             ],
+            [
+                'name' => 'Sviluppo Mobile',
+                'description' => 'Progetti orientati allo sviluppo di applicazioni per dispositivi mobili, utilizzando tecnologie come React Native o Swift. (Projects oriented towards developing applications for mobile devices, using technologies like React Native or Swift.)',
+            ],
         ];
 
         foreach ($types as $type) {

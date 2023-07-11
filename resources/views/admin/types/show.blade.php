@@ -19,7 +19,9 @@
 			<ul class="list-group list-group-flush">
 				@foreach ($type->projects as $project)
 					<li class="list-group-item">
-						<a href="{{ route('admin.projects.show', ['project' => $project]) }}">{{ $project->title }}</a>
+						<a href="{{ route('admin.projects.show', ['project' => $project]) }}">"{{ $project->title }}"</a><span> -
+							({{ $project->creation_date }})
+						</span>
 					</li>
 				@endforeach
 			</ul>
