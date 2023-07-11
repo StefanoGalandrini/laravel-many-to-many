@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ProjectsController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Guests\PageController as GuestsPageController;
 use App\Http\Controllers\ProfileController;
