@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 class TypeController extends Controller
 {
     // Validations
-    protected $validationRules = [
+    protected $validations = [
         'name' => 'required|max:20',
-        'description' => 'required|text',
+        'description' => 'required|string|max:500',
     ];
 
+    protected $validation_messages = [
+        'required'   => ':attribute is a required field',
+        'max'        => ':attribute must be less than :max characters long',
+    ];
 
     /**
      * Display a listing of the resource.
@@ -44,14 +48,18 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate($this->validationRules);
+        $request->validate($this->validations, $this->validation_messages);
 
-        $type = new Type;
-        $type->name = $validatedData['name'];
-        $type->description = $validatedData['description'];
-        $type->save();
+        $data = $request->all();
 
-        return redirect()->route('admin.types.index')->with('success', 'New type successfully created!');
+        $newType = new Type;
+
+        $newType->name = $data['name'];
+        $newType->description = $data['description'];
+
+        $newType->save();
+
+        return redirect()->route('admin.types.index')->with('create_success', $newType);
     }
 
     /**

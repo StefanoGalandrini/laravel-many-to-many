@@ -29,11 +29,11 @@
 							<td class="fs-15">{{ $type->description }}</td>
 							<td>
 								<a href="{{ route('admin.types.show', ['type' => $type]) }}" class="btn btn-warning btn-sm">Show</a>
-								<a href="{{ route('admin.types.edit', ['type' => $type]) }}" class="btn btn-primary btn-sm">Edit</a>
-								<button type="button" class="btn btn-danger btn-sm js-delete" data-bs-toggle="modal"
+								{{-- <a href="{{ route('admin.types.edit', ['type' => $type]) }}" class="btn btn-primary btn-sm">Edit</a> --}}
+								{{-- <button type="button" class="btn btn-danger btn-sm js-delete" data-resource="type" data-bs-toggle="modal"
 									data-bs-target="#deleteModal" data-id="{{ $type->id }}">
 									Delete
-								</button>
+								</button> --}}
 							</td>
 						</tr>
 					@endforeach
@@ -42,7 +42,7 @@
 
 
 			<!-- Modal -->
-			<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			{{-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -53,7 +53,7 @@
 							Are you sure?
 						</div>
 						<div class="modal-footer">
-							<form action="" data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}" method="post"
+							<form action="" data-template="{{ route('admin.types.destroy', ['type' => '*****']) }}" method="post"
 								class="d-inline-block" id="confirm-delete">
 								@csrf
 								@method('delete')
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 
-	</div>
-@endsection
+		</div>
+	@endsection

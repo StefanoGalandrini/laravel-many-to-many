@@ -4,9 +4,9 @@
 	<div class="wrapper w-100 mx-auto">
 		{{-- Messaggio di conferma cancellazione --}}
 		@if (session('delete_success'))
-			@php $project = session('delete_success') @endphp
+			@php $technology = session('delete_success') @endphp
 			<div class="alert alert-danger">
-				Project "{{ $project->title }}" has been deleted
+				Technology "{{ $technology->name }}" has been deleted.
 			</div>
 		@endif
 
@@ -30,7 +30,7 @@
 									class="btn btn-warning btn-sm">Show</a>
 								<a href="{{ route('admin.technologies.edit', ['technology' => $technology]) }}"
 									class="btn btn-primary btn-sm">Edit</a>
-								<button type="button" class="btn btn-danger btn-sm js-delete" data-bs-toggle="modal"
+								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="technology" data-bs-toggle="modal"
 									data-bs-target="#deleteModal" data-id="{{ $technology->id }}">
 									Delete
 								</button>
@@ -52,8 +52,8 @@
 							Are you sure?
 						</div>
 						<div class="modal-footer">
-							<form action="" data-template="{{ route('admin.technologies.destroy', ['technology' => '*****']) }}"
-								method="post" class="d-inline-block" id="confirm-delete">
+							<form action="" data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}" method="post"
+								class="d-inline-block" id="confirm-delete">
 								@csrf
 								@method('delete')
 								<button class="btn btn-danger">Yes</button>
