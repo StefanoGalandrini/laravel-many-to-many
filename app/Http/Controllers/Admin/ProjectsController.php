@@ -102,8 +102,9 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        $types = Type::all();
-        return view('admin.projects.edit', ['project' => $project, 'types' => $types]);
+        $types          = Type::all();
+        $technologies   = Technology::all();
+        return view('admin.projects.edit', ['project' => $project, 'types' => $types, 'technologies' => $technologies]);
     }
 
     /**
@@ -129,6 +130,8 @@ class ProjectsController extends Controller
             'creation_date' => $data['creation_date'],
             'url_repo'      => $data['url_repo']
         ]);
+
+        $project->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', ['project' => $project])->with('update_success', $project);
     }
