@@ -11,15 +11,16 @@
 		@endif
 
 		<h1>Projects</h1>
-		<div class="d-flex justify-content-center">
-			<table class="table table-bordered table-secondary table-striped table-hover table-rounded">
+		<div class="d-flex justify-content-center w-100">
+			<table class="table table-bordered table-secondary table-striped table-hover table-rounded w-100">
 				<thead>
 					<tr class="thead-dark">
 						<th>Title</th>
 						<th>Type</th>
 						<th>Image</th>
+						<th class="w-25">Technologies</th>
 						<th>Creation Date</th>
-						<th>Github URL</th>
+						<th class="w-15">Github URL</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -31,8 +32,9 @@
 								<a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ $project->type->name }}
 								</a>
 							</td>
-							<td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 100px;">
+							<td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 120px;">
 							</td>
+							<td class="mt-4 fw-light fst-italic">{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td>
 							<td>{{ \Carbon\Carbon::parse($project->creation_date)->format('d M Y') }}</td>
 							<td><a href="{{ $project->github_url }}">{{ $project->url_repo }}</a></td>
 							<td>
