@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Faker\Generator as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,6 +19,7 @@ class ProjectsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
         for ($i = 0; $i < 50; $i++) {
             $project = new Project;
@@ -30,6 +32,9 @@ class ProjectsTableSeeder extends Seeder
             $project->url_repo = 'https://github.com/StefanoGalandrini/' . $faker->lexify('???????-?????');
 
             $project->save();
+
+            // associate a random number of technologies to each project
+            $project->technologies()->sync($faker->randomElement($technologies, rand(1, 15))->id);
         }
     }
 }
