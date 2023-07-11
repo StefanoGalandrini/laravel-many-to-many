@@ -18,6 +18,9 @@
 					<h2 class="card-title">PROJECT:</h2>
 					<h3>{{ $project->title }}</h3>
 					<h4>- Type: {{ $project->type->name }}</h4>
+					<h5 class="mt-4 fw-light fst-italic">- Technologies:
+						{{ implode(', ', $project->technologies->pluck('name')->all()) }}
+					</h5>
 					<p class="card-text mt-5">Description:</p>
 					<p>{{ $project->description }}</p>
 				</div>
