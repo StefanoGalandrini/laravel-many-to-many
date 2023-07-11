@@ -19,7 +19,7 @@ class ProjectsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $types = Type::all();
-        $technologies = Technology::all();
+        $technologies = Technology::all()->pluck('id');
 
         for ($i = 0; $i < 50; $i++) {
             $project = new Project;
@@ -34,7 +34,7 @@ class ProjectsTableSeeder extends Seeder
             $project->save();
 
             // associate a random number of technologies to each project
-            $project->technologies()->sync($faker->randomElement($technologies, rand(1, 15))->id);
+            $project->technologies()->sync($faker->randomElements($technologies, rand(1, 15)));
         }
     }
 }
