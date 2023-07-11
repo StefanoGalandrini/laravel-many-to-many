@@ -2,6 +2,13 @@
 
 @section('contents')
 	<div class="wrapper w-100 mx-auto">
+		{{-- Messaggio di conferma cancellazione --}}
+		@if (session('delete_success'))
+			@php $project = session('delete_success') @endphp
+			<div class="alert alert-danger">
+				Project "{{ $project->title }}" has been deleted
+			</div>
+		@endif
 
 		<h1>Technologies</h1>
 		<div class="d-flex justify-content-center">

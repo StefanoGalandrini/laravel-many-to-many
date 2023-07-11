@@ -1,6 +1,20 @@
 @extends('admin.layouts.base')
 
 @section('contents')
+	@if (session('update_success'))
+		@php $technology = session('update_success') @endphp
+		<div class="alert alert-primary">
+			Technology "{{ $technology->name }}" has been successfully updated
+		</div>
+	@endif
+
+	@if (session('create_success'))
+		@php $technology = session('create_success') @endphp
+		<div class="alert alert-success">
+			Technology "{{ $technology->name }}" has been successfully created
+		</div>
+	@endif
+
 	<div class="card mx-auto rounded" style="width: 50vw">
 		<div class="card-body">
 			<span class="card-title fs-5 fw-bold">TECHNOLOGY: </span><span class="fs-4">{{ $technology->name }}</span>

@@ -3,10 +3,18 @@
 @section('contents')
 	@if (session('update_success'))
 		@php $project = session('update_success') @endphp
-		<div class="alert alert-success">
+		<div class="alert alert-primary">
 			Project "{{ $project->title }}" has been successfully updated
 		</div>
 	@endif
+
+	@if (session('create_success'))
+		@php $project = session('create_success') @endphp
+		<div class="alert alert-success">
+			Project "{{ $project->title }}" has been successfully created
+		</div>
+	@endif
+
 	<div class="card mx-auto rounded">
 		<div class="row no-gutters">
 			<div class="col-12 col-md-4">

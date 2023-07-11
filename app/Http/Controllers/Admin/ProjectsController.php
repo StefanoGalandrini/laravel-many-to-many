@@ -82,7 +82,7 @@ class ProjectsController extends Controller
 
         $newProject->technologies()->sync($data['technologies'] ?? []);
 
-        return redirect()->route('admin.projects.show', ['project' => $newProject]);
+        return redirect()->route('admin.projects.show', ['project' => $newProject])->with('create_success', $newProject);
     }
 
     /**

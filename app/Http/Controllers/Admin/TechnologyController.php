@@ -10,14 +10,14 @@ class TechnologyController extends Controller
 {
 
     // Validations
-    protected $validationRules = [
+    protected $validations = [
         'name' => 'required|max:40|unique:technologies',
     ];
 
-    protected $validationMessages = [
+    protected $validation_messages = [
         'required'   => ':attribute is a required field',
         'max'        => ':attribute must be less than :max characters long',
-        'unique'     => 'The technology name :attribute has already been taken.',
+        'unique'     => 'This technology already exists.',
     ];
     /**
      * Display a listing of the resource.
@@ -48,15 +48,17 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate($this->validationRules, $this->validationMessages);
+        $request->validate($this->validations, $this->validation_messages);
 
-        $technology = new Technology();
+        $data = $request->all();
 
-        $technology->name = $request->name;
+        $newTechnology = new Technology();
 
-        $technology->save();
+        $newTechnology->name = $data['name'];
 
-        return redirect()->route('admin.technologies.index')->with('create_success', $technology);
+        $newTechnology->save();
+
+        return redirect()->route('admin.technologies.show', ['technology' => $newTechnology])->with('create_success', $newTechnology);
     }
 
     /**
@@ -78,7 +80,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('admin.technologies.edit', ['technology' => $technology]);
     }
 
     /**
@@ -90,7 +92,19 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, Technology $technology)
     {
-        //
+        // Validate Data
+        $request->validate($this->validations, $this->validation_messages);
+
+        $data = $request->all();
+
+        // Update Data
+        $updated = $technology->update([
+            'name' => $data['name'],
+        ]);
+
+        $technology->projects()->sync($data['projects'] ?? []);
+
+        return redirect()->route('admin.technologies.show', ['technology' => $technology])->with('update_success', $technology);
     }
 
     /**
