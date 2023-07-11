@@ -61,6 +61,29 @@
 						@endif --}}
 					</ul>
 				</li>
+
+				{{-- Dropdown menu for Technlogies --}}
+				<li class="nav-item dropdown">
+
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						TECHNOLOGIES
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="{{ route('admin.technologies.index') }}">Index</a></li>
+						<li><a class="dropdown-item" href="{{ route('admin.technologies.create') }}">Create</a></li>
+						{{-- @if (isset($project) && Route::currentRouteName() !== 'admin.technologies.index')
+							<li><a class="dropdown-item" href="{{ route('admin.technologies.edit', ['project' => $project]) }}">Edit</a></li>
+						@endif
+						@if (isset($project) && Route::currentRouteName() !== 'admin.technologies.index')
+							<li>
+								<button type="button" class="btn btn-danger btn-sm js-delete ms-2" data-bs-toggle="modal"
+									data-bs-target="#deleteModal" data-id="{{ $project->id }}">
+									Delete
+								</button>
+							</li>
+						@endif --}}
+					</ul>
+				</li>
 			</ul>
 
 			<ul class="navbar-nav mb-2 mb-lg-0">
