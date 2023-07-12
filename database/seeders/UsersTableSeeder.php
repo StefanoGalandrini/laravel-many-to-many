@@ -25,17 +25,17 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name'      => 'Laura',
-                'email'     => $faker->safeEmail(),
+                'email'     => 'laura@hotmail.com',
                 'password'  => Hash::make('Laura_1111'),
             ],
             [
                 'name'      => 'Giuseppe',
-                'email'     => $faker->safeEmail(),
+                'email'     => 'giuseppe@hotmail.com',
                 'password'  => Hash::make('Giuseppe_1111'),
             ],
             [
                 'name'      => 'Elena',
-                'email'     => $faker->safeEmail(),
+                'email'     => 'elena@hotmail.com',
                 'password'  => Hash::make('Elena_1111'),
             ],
         ];
