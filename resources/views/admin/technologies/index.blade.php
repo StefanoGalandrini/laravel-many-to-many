@@ -1,7 +1,11 @@
 @extends('admin.layouts.base')
 
+@section('page-title')
+	<h1 class="m-0">TECHNOLOGIES</h1>
+@endsection
+
 @section('contents')
-	<div class="wrapper w-100 mx-auto">
+	<div class="wrapper w-50 mx-auto">
 		{{-- Messaggio di conferma cancellazione --}}
 		@if (session('delete_success'))
 			@php $technology = session('delete_success') @endphp
@@ -10,7 +14,6 @@
 			</div>
 		@endif
 
-		<h1>Technologies</h1>
 		<div class="d-flex justify-content-center">
 			<table class="table table-bordered table-secondary table-striped table-hover table-rounded">
 				<thead>
@@ -64,5 +67,6 @@
 				</div>
 			</div>
 		</div>
+		{{ $technologies->links() }}
 	</div>
 @endsection

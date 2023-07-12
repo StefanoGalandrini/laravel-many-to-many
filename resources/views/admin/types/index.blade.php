@@ -1,5 +1,9 @@
 @extends('admin.layouts.base')
 
+@section('page-title')
+	<h1 class="m-0">TYPES</h1>
+@endsection
+
 @section('contents')
 	<div class="wrapper w-100 mx-auto">
 		{{-- Messaggio di conferma cancellazione --}}
@@ -18,14 +22,13 @@
 			</div>
 		@endif
 
-		<h1>Types</h1>
 		<div class="d-flex justify-content-center">
 			<table class="table table-bordered table-secondary table-striped table-hover table-rounded">
 				<thead>
 					<tr class="thead-dark">
 						<th>ID</th>
 						<th>Name</th>
-						<th>Description</th>
+						<th class="w-50">Description</th>
 						<th>Actions</th>
 					</tr>
 				</thead>

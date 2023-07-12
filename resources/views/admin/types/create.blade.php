@@ -1,8 +1,11 @@
 @extends('admin.layouts.base')
 
+@section('page-title')
+	<h1 class="m-0">CREATE NEW TYPE</h1>
+@endsection
+
 @section('contents')
 	<div class="wrapper w-50 mx-auto">
-		<h1>Add New Type</h1>
 
 		<form method="POST" action="{{ route('admin.types.store') }}" novalidate>
 			@csrf

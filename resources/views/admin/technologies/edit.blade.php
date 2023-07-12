@@ -1,8 +1,11 @@
 @extends('admin.layouts.base')
 
+@section('page-title')
+	<h1 class="m-0">EDIT TECHNOLOGY</h1>
+@endsection
+
 @section('contents')
 	<div class="wrapper w-50 mx-auto">
-		<h1>Edit Technology</h1>
 
 		<form method="POST" action="{{ route('admin.technologies.update', ['technology' => $technology->id]) }}" novalidate>
 			@csrf
