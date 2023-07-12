@@ -15,23 +15,7 @@ if (confirmDelete)
     {
         button.addEventListener('click', function ()
         {
-            let resource = this.dataset.resource;
-            let id = this.dataset.id;
-
-            let template;
-            if (resource === 'project')
-            {
-                template = '/admin/projects/*****';
-            } else if (resource === 'technology')
-            {
-                template = '/admin/technologies/*****';
-            } else if (resource === 'type')
-            {
-                template = '/admin/types/*****';
-            }
-
-            confirmDelete.action = template.replace('*****', id);
-
+            confirmDelete.action = confirmDelete.dataset.template.replace('*****', this.dataset.id);
         });
     });
 }

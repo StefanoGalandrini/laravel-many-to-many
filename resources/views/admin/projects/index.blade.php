@@ -34,7 +34,13 @@
 							</td>
 							<td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 120px;">
 							</td>
-							<td class="mt-4 fw-light fst-italic">{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td>
+							{{-- <td class="mt-4 fw-light fst-italic">{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td> --}}
+							<td class="mt-4 fw-light fst-italic">
+								@foreach ($project->technologies as $technology)
+									<a href="{{ route('admin.technologies.show', ['technology' => $technology]) }}">{{ $technology->name }}</a>
+								@endforeach
+							</td>
+							{{-- {{ implode(', ', $project->technologies->pluck('name')->all()) }}</td> --}}
 							<td>{{ \Carbon\Carbon::parse($project->creation_date)->format('d M Y') }}</td>
 							<td><a href="{{ $project->github_url }}">{{ $project->url_repo }}</a></td>
 							<td>

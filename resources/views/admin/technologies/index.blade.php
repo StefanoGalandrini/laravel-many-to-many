@@ -52,8 +52,8 @@
 							Are you sure?
 						</div>
 						<div class="modal-footer">
-							<form action="" data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}" method="post"
-								class="d-inline-block" id="confirm-delete">
+							<form action="" data-template="{{ route('admin.technologies.destroy', ['technology' => '*****']) }}"
+								method="post" class="d-inline-block" id="confirm-delete">
 								@csrf
 								@method('delete')
 								<button class="btn btn-danger">Yes</button>

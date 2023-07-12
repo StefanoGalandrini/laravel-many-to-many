@@ -25,7 +25,7 @@
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="{{ route('admin.projects.index') }}">Index</a></li>
 						<li><a class="dropdown-item" href="{{ route('admin.projects.create') }}">Create</a></li>
-						@if (isset($project) && Route::currentRouteName() !== 'admin.projects.index')
+						{{-- @if (isset($project) && Route::currentRouteName() !== 'admin.projects.index')
 							<li><a class="dropdown-item" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a></li>
 						@endif
 						@if (isset($project) && Route::currentRouteName() !== 'admin.projects.index')
@@ -35,7 +35,7 @@
 									Delete
 								</button>
 							</li>
-						@endif
+						@endif --}}
 					</ul>
 
 
@@ -48,17 +48,17 @@
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="{{ route('admin.types.index') }}">Index</a></li>
 						<li><a class="dropdown-item" href="{{ route('admin.types.create') }}">Create</a></li>
-						@if (isset($project) && Route::currentRouteName() !== 'admin.types.index')
-							<li><a class="dropdown-item" href="{{ route('admin.types.edit', ['project' => $project]) }}">Edit</a></li>
+						{{-- @if (isset($project) && Route::currentRouteName() !== 'admin.types.index')
+							<li><a class="dropdown-item" href="{{ route('admin.types.edit', ['type' => $type]) }}">Edit</a></li>
 						@endif
 						@if (isset($project) && Route::currentRouteName() !== 'admin.types.index')
 							<li>
 								<button type="button" class="btn btn-danger btn-sm js-delete ms-2" data-bs-toggle="modal"
-									data-bs-target="#deleteModal" data-id="{{ $project->id }}">
+									data-bs-target="#deleteModal" data-id="{{ $type->id }}">
 									Delete
 								</button>
 							</li>
-						@endif
+						@endif --}}
 					</ul>
 				</li>
 
@@ -109,7 +109,7 @@
 </nav>
 
 <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -130,4 +130,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> --}}
