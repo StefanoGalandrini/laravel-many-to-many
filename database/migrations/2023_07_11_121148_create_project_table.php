@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id');
 
             $table->string('title', 100);
+            $table->string('slug', 100)->unique();
             $table->string('url_image', 200);
             $table->text('description');
             $table->date('creation_date');

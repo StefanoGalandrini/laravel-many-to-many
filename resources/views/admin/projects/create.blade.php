@@ -1,18 +1,11 @@
 @extends('admin.layouts.base')
 
+@section('page-title')
+	<h1 class="m-0">CREATE NEW PROJECT</h1>
+@endsection
+
 @section('contents')
 	<div class="wrapper w-50 mx-auto">
-		<h1>Add New Project</h1>
-
-		{{-- @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
 
 		<form method="POST" action="{{ route('admin.projects.store') }}" novalidate>
 			@csrf

@@ -1,5 +1,9 @@
 @extends('admin.layouts.base')
 
+@section('page-title')
+	<h1 class="m-0">PROJECTS</h1>
+@endsection
+
 @section('contents')
 	<div class="wrapper w-100 mx-auto">
 		{{-- Messaggio di conferma cancellazione --}}
@@ -10,7 +14,7 @@
 			</div>
 		@endif
 
-		<h1>Projects</h1>
+		{{-- <h1>Projects</h1> --}}
 		<div class="d-flex justify-content-center w-100">
 			<table class="table table-bordered table-secondary table-striped table-hover table-rounded w-100">
 				<thead>
@@ -37,7 +41,8 @@
 							{{-- <td class="mt-4 fw-light fst-italic">{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td> --}}
 							<td class="mt-4 fw-light fst-italic">
 								@foreach ($project->technologies as $technology)
-									<a href="{{ route('admin.technologies.show', ['technology' => $technology]) }}">{{ $technology->name }}</a>
+									<a
+										href="{{ route('admin.technologies.show', ['technology' => $technology]) }}">{{ $technology->name }}</a>{{ !$loop->last ? ', ' : '' }}
 								@endforeach
 							</td>
 							{{-- {{ implode(', ', $project->technologies->pluck('name')->all()) }}</td> --}}
@@ -47,7 +52,7 @@
 								<a href="{{ route('admin.projects.show', ['project' => $project]) }}" class="btn btn-warning btn-sm">Show</a>
 								<a href="{{ route('admin.projects.edit', ['project' => $project]) }}" class="btn btn-primary btn-sm">Edit</a>
 								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="project" data-bs-toggle="modal"
-									data-bs-target="#deleteModal" data-id="{{ $project->id }}">
+									data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
 									Delete
 								</button>
 							</td>

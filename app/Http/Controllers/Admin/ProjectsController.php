@@ -72,6 +72,7 @@ class ProjectsController extends Controller
         $newProject = new Project();
 
         $newProject->title          = $data['title'];
+        $newProject->slug           = Project::slugger($data['title']);
         $newProject->type_id        = $data['type_id'];
         $newProject->url_image      = $data['url_image'];
         $newProject->description    = $data['description'];
@@ -91,8 +92,9 @@ class ProjectsController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         return view('admin.projects.show', ['project' => $project]);
     }
 
@@ -102,8 +104,9 @@ class ProjectsController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         $types          = Type::all();
         $technologies   = Technology::all();
         return view('admin.projects.edit', ['project' => $project, 'types' => $types, 'technologies' => $technologies]);
@@ -116,8 +119,9 @@ class ProjectsController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         // Validate Data
         $request->validate($this->validations, $this->validation_messages);
 
@@ -144,8 +148,9 @@ class ProjectsController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         // Detach tecnologies from project
         $project->technologies()->detach();
 

@@ -22,10 +22,14 @@ class ProjectsTableSeeder extends Seeder
         $technologies = Technology::all()->pluck('id');
 
         for ($i = 0; $i < 50; $i++) {
+            $title = $faker->words(rand(2, 5), true);
+            $slug = Project::slugger($title);
+
             $project = new Project;
 
             $project->type_id = $faker->randomElement($types)->id;
-            $project->title = $faker->words(rand(2, 5), true);
+            $project->title = $title;
+            $project->slug = $slug;
             $project->url_image = 'https://picsum.photos/id/' . rand(1, 1080) . '/400/500';
             $project->description = $faker->paragraph(rand(2, 10), true);
             $project->creation_date = $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');

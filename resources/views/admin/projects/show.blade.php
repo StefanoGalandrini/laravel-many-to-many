@@ -1,5 +1,9 @@
 @extends('admin.layouts.base')
 
+@section('page-title')
+	<h1 class="m-0">PROJECT DETAILS</h1>
+@endsection
+
 @section('contents')
 	@if (session('update_success'))
 		@php $project = session('update_success') @endphp
@@ -19,12 +23,11 @@
 		<div class="row no-gutters">
 			<div class="col-12 col-md-4">
 				<img src="{{ $project->url_image }}" alt="{{ $project->title }}" class="card-img img-fluid"
-					style="max-width: 90%; height: auto;">
+					style="max-width: 80%; height: auto;">
 			</div>
 			<div class="col-12 col-md-8">
 				<div class="card-body">
-					<h2 class="card-title">PROJECT:</h2>
-					<h3>{{ $project->title }}</h3>
+					<h2 class="card-title">Project <span class="fst-italic text-uppercase"> "{{ $project->title }}"</span></h2>
 					<h4>- Type: {{ $project->type->name }}</h4>
 					<h5 class="mt-4 fw-light fst-italic">- Technologies:
 						{{ implode(', ', $project->technologies->pluck('name')->all()) }}

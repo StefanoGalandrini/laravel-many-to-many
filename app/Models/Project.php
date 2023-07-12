@@ -4,12 +4,14 @@ namespace App\Models;
 
 use App\Models\Technology;
 use App\Models\Type;
+use App\Traits\Slugger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
     use HasFactory;
+    use Slugger;
 
     protected $fillable = [
         'title',
@@ -27,5 +29,10 @@ class Project extends Model
     public function technologies()
     {
         return $this->belongsToMany(Technology::class);
+    }
+
+    public function getRouteKey()
+    {
+        return $this->slug;
     }
 }
