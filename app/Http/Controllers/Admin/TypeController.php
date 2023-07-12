@@ -117,13 +117,11 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        if ($type->projects->count() > 0) {
-            // Se il tipo ha progetti associati, interrompi l'eliminazione
-            return redirect()->route('admin.types.index')
-                ->with('delete_error', $type);
+        foreach ($type->projects as $project) {
+            $project->type_id = 1;
+            $project->update();
         }
 
-        // Se non ci sono progetti associati, procedi con l'eliminazione
         $type->delete();
 
         return redirect()->route('admin.types.index')
