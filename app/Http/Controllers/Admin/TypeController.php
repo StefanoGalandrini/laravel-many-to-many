@@ -93,13 +93,20 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
+        // Validate Data
         $request->validate($this->validations, $this->validation_messages);
 
         $data = $request->all();
 
-        $type->update($data);
+        // Update Data
+        $updated = $type->update([
+            'name'          => $data['name'],
+            'description'   => $data['description'],
+        ]);
 
-        return redirect()->route('admin.types.show')->with('update_success', $type);
+        // $type->projects()->sync($data['projects'] ?? []);
+
+        return redirect()->route('admin.types.show', ['type' => $type])->with('update_success', $type);
     }
 
     /**
