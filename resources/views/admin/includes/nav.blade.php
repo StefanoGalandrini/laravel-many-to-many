@@ -47,8 +47,8 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="{{ route('admin.types.index') }}">Index</a></li>
-						{{-- <li><a class="dropdown-item" href="{{ route('admin.types.create') }}">Create</a></li> --}}
-						{{-- @if (isset($project) && Route::currentRouteName() !== 'admin.types.index')
+						<li><a class="dropdown-item" href="{{ route('admin.types.create') }}">Create</a></li>
+						@if (isset($project) && Route::currentRouteName() !== 'admin.types.index')
 							<li><a class="dropdown-item" href="{{ route('admin.types.edit', ['project' => $project]) }}">Edit</a></li>
 						@endif
 						@if (isset($project) && Route::currentRouteName() !== 'admin.types.index')
@@ -58,7 +58,7 @@
 									Delete
 								</button>
 							</li>
-						@endif --}}
+						@endif
 					</ul>
 				</li>
 

@@ -81,7 +81,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', ['type' => $type]);
     }
 
     /**
@@ -93,7 +93,13 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        $request->validate($this->validations, $this->validation_messages);
+
+        $data = $request->all();
+
+        $type->update($data);
+
+        return redirect()->route('admin.types.show')->with('update_success', $type);
     }
 
     /**
@@ -104,6 +110,16 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        if ($type->projects->count() > 0) {
+            // Se il tipo ha progetti associati, interrompi l'eliminazione
+            return redirect()->route('admin.types.index')
+                ->with('delete_error', $type);
+        }
+
+        // Se non ci sono progetti associati, procedi con l'eliminazione
+        $type->delete();
+
+        return redirect()->route('admin.types.index')
+            ->with('delete_success', $type);
     }
 }

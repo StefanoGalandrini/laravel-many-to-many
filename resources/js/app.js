@@ -25,6 +25,9 @@ if (confirmDelete)
             } else if (resource === 'technology')
             {
                 template = '/admin/technologies/*****';
+            } else if (resource === 'type')
+            {
+                template = '/admin/types/*****';
             }
 
             confirmDelete.action = template.replace('*****', id);

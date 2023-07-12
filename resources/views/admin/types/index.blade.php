@@ -3,12 +3,20 @@
 @section('contents')
 	<div class="wrapper w-100 mx-auto">
 		{{-- Messaggio di conferma cancellazione --}}
-		{{-- @if (session('delete_success'))
+		@if (session('delete_success'))
 			@php $type = session('delete_success') @endphp
 			<div class="alert alert-danger">
 				Type "{{ $type->name }}" has been deleted
 			</div>
-		@endif --}}
+		@endif
+
+		{{-- Messaggio di cancellazione fallita --}}
+		@if (session('delete_error'))
+			@php $type = session('delete_error') @endphp
+			<div class="alert alert-warning">
+				Type "{{ $type->name }}" is associated with Projects and it can't be deleted
+			</div>
+		@endif
 
 		<h1>Types</h1>
 		<div class="d-flex justify-content-center">
@@ -29,11 +37,11 @@
 							<td class="fs-15">{{ $type->description }}</td>
 							<td>
 								<a href="{{ route('admin.types.show', ['type' => $type]) }}" class="btn btn-warning btn-sm">Show</a>
-								{{-- <a href="{{ route('admin.types.edit', ['type' => $type]) }}" class="btn btn-primary btn-sm">Edit</a> --}}
-								{{-- <button type="button" class="btn btn-danger btn-sm js-delete" data-resource="type" data-bs-toggle="modal"
+								<a href="{{ route('admin.types.edit', ['type' => $type]) }}" class="btn btn-primary btn-sm">Edit</a>
+								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="type" data-bs-toggle="modal"
 									data-bs-target="#deleteModal" data-id="{{ $type->id }}">
 									Delete
-								</button> --}}
+								</button>
 							</td>
 						</tr>
 					@endforeach
@@ -42,7 +50,7 @@
 
 
 			<!-- Modal -->
-			{{-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -64,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-		</div> --}}
-
 		</div>
-	@endsection
+
+	</div>
+@endsection
