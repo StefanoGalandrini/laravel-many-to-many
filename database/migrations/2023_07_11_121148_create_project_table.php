@@ -29,6 +29,8 @@ return new class extends Migration
             // define column as Foreign Key
             $table->foreign('type_id')->references('id')->on('types');
 
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ if (confirmDelete)
         button.addEventListener('click', function ()
         {
             confirmDelete.action = confirmDelete.dataset.template.replace('*****', this.dataset.id);
+            console.log('prova', this.dataset.id);
         });
     });
 }

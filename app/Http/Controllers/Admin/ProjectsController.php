@@ -148,15 +148,42 @@ class ProjectsController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($slug)
     {
         $project = Project::where('slug', $slug)->firstOrFail();
-        // Detach tecnologies from project
-        $project->technologies()->detach();
 
-        // Delete project
+        // Soft Delete project
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('delete_success', $project);
+    }
+
+    public function restore($slug)
+    {
+        $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
+        $project->restore();
+
+        return redirect()->route('admin.projects.trashed')->with('restore_success', $project);
+    }
+
+    public function trashed()
+    {
+        $projects = Project::onlyTrashed()->paginate(3);
+        return view('admin.projects.trashed', ['projects' => $projects]);
+    }
+
+    public function forcedelete($slug)
+    {
+        $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
+        // dd($project);
+
+        // Detach tecnologies from project
+        $project->technologies()->detach();
+
+        // Force delete project
+        $project->forceDelete();
+
+        return redirect()->route('admin.projects.trashed')->with('delete_success', $project);
     }
 }

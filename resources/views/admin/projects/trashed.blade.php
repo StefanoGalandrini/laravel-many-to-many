@@ -1,7 +1,7 @@
 @extends('admin.layouts.base')
 
 @section('page-title')
-	<h1 class="m-0">PROJECTS</h1>
+	<h1 class="m-0">TRASHED PROJECTS</h1>
 @endsection
 
 @section('contents')
@@ -10,12 +10,17 @@
 		@if (session('delete_success'))
 			@php $project = session('delete_success') @endphp
 			<div class="alert alert-warning">
-				Project "{{ $project->title }}" has been deleted
+				Project "{{ $project->title }}" has been permanently deleted
 			</div>
 		@endif
 
-		{{-- Trashed projects --}}
-		<a href="{{ route('admin.projects.trashed') }}" class="btn btn-secondary px-3 mb-3">Trashed</a>
+		{{-- Messaggio di conferma Restore --}}
+		@if (session('restore_success'))
+			@php $project = session('restore_success') @endphp
+			<div class="alert alert-success">
+				Project "{{ $project->title }}" has been restored
+			</div>
+		@endif
 
 		{{-- <h1>Projects</h1> --}}
 		<div class="d-flex justify-content-center w-100">
@@ -52,11 +57,19 @@
 							<td>{{ \Carbon\Carbon::parse($project->creation_date)->format('d M Y') }}</td>
 							<td><a href="{{ $project->github_url }}">{{ $project->url_repo }}</a></td>
 							<td>
-								<a href="{{ route('admin.projects.show', ['project' => $project]) }}" class="btn btn-warning btn-sm">Show</a>
-								<a href="{{ route('admin.projects.edit', ['project' => $project]) }}" class="btn btn-primary btn-sm">Edit</a>
+								<!-- Restore Button -->
+								<form action="{{ route('admin.projects.restore', ['slug' => $project->slug]) }}" method="post"
+									class="d-inline-block">
+									@csrf
+									<button type="submit" class="btn btn-primary btn-sm">
+										Restore
+									</button>
+								</form>
+
+								<!-- Destroy Button with Modal -->
 								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="project" data-bs-toggle="modal"
 									data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
-									Delete
+									Destroy
 								</button>
 							</td>
 						</tr>
@@ -74,11 +87,11 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							Are you sure?
+							This project will be lost: Are you sure?
 						</div>
 						<div class="modal-footer">
-							<form action="" data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}" method="post"
-								class="d-inline-block" id="confirm-delete">
+							<form action="" data-template="{{ route('admin.projects.forcedelete', ['slug' => '*****']) }}"
+								method="post" class="d-inline-block" id="confirm-delete">
 								@csrf
 								@method('delete')
 								<button class="btn btn-danger">Yes</button>

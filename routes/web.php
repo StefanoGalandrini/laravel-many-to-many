@@ -27,6 +27,15 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
+
+        // Route for trashed projects
+        Route::get('projects/trashed', [ProjectsController::class, 'trashed'])->name('projects.trashed');
+
+        // Routes for restoring and permanently deleting projects
+        Route::post('projects/{slug}/restore', [ProjectsController::class, 'restore'])->name('projects.restore');
+        Route::delete('projects/{slug}/forcedelete', [ProjectsController::class, 'forcedelete'])->name('projects.forcedelete');
+
+        // Route for Projects
         Route::resource('projects', ProjectsController::class);
 
         // Routes for Types
