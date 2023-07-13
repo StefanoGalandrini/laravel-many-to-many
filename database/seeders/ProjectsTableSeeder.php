@@ -30,7 +30,7 @@ class ProjectsTableSeeder extends Seeder
             $project->type_id = $faker->randomElement($types)->id;
             $project->title = $title;
             $project->slug = $slug;
-            $project->url_image = 'https://picsum.photos/id/' . rand(1, 1080) . '/400/500';
+            $project->url_image = 'https://picsum.photos/id/' . rand(1, 1080) . '/500/350';
             $project->description = $faker->paragraph(rand(2, 10), true);
             $project->creation_date = $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');
             $project->url_repo = 'https://github.com/StefanoGalandrini/' . $faker->lexify('???????-?????');
