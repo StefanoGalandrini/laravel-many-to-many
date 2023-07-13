@@ -38,7 +38,7 @@ class ProjectsTableSeeder extends Seeder
             $project->save();
 
             // associate a random number of technologies to each project
-            $project->technologies()->sync($faker->randomElements($technologies, rand(1, 15)));
+            $project->technologies()->sync($faker->randomElements($technologies, rand(1, 3)));
         }
     }
 }

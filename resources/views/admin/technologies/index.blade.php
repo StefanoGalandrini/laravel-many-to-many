@@ -20,6 +20,7 @@
 					<tr class="thead-dark">
 						<th>ID</th>
 						<th>Name</th>
+						<th>Project Count</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -28,6 +29,7 @@
 						<tr>
 							<td class="fs-10">{{ $technology->id }}</td>
 							<td class="fs-8">{{ $technology->name }}</td>
+							<td class="fs-8">{{ $technology->projects->count() }}</td>
 							<td>
 								<a href="{{ route('admin.technologies.show', ['technology' => $technology]) }}"
 									class="btn btn-success btn-sm">Show</a>
