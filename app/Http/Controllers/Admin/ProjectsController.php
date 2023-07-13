@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectsController extends Controller
 {
@@ -15,6 +16,7 @@ class ProjectsController extends Controller
         'title'          => 'required|string|min:5|max:100',
         'type_id'        => 'required|integer|exists:types,id',
         'url_image'      => 'required|url|max:200',
+        'image'          => 'nullable|image|max:1024',
         'description'    => 'required|string',
         'creation_date'  => 'required|date',
         'url_repo'       => 'required|url|max:200',
@@ -26,7 +28,7 @@ class ProjectsController extends Controller
         'required'   => ':attribute is a required field',
         'exists'     => ':attribute is out of range',
         'min'        => ':attribute must be at least :min characters long',
-        'max'        => ':attribute must be less than :max characters long',
+        'max'        => ':attribute exceeds its maximum size',
         'url'        => ':attribute must be a valid URL address',
     ];
 
@@ -65,8 +67,11 @@ class ProjectsController extends Controller
         // Validate Data
         $request->validate($this->validations, $this->validation_messages);
 
-
         $data = $request->all();
+
+        //Upload file
+        $imagePath = Storage::put('uploads', $data['image']);
+
 
         // Save Data
         $newProject = new Project();
@@ -75,12 +80,14 @@ class ProjectsController extends Controller
         $newProject->slug           = Project::slugger($data['title']);
         $newProject->type_id        = $data['type_id'];
         $newProject->url_image      = $data['url_image'];
+        $newProject->image          = $imagePath;
         $newProject->description    = $data['description'];
         $newProject->creation_date  = $data['creation_date'];
         $newProject->url_repo       = $data['url_repo'];
 
         $newProject->save();
 
+        // Link to Table "technologies"
         $newProject->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', ['project' => $newProject])->with('create_success', $newProject);
@@ -106,7 +113,7 @@ class ProjectsController extends Controller
      */
     public function edit($slug)
     {
-        $project = Project::where('slug', $slug)->firstOrFail();
+        $project        = Project::where('slug', $slug)->firstOrFail();
         $types          = Type::all();
         $technologies   = Technology::all();
         return view('admin.projects.edit', ['project' => $project, 'types' => $types, 'technologies' => $technologies]);
@@ -122,21 +129,37 @@ class ProjectsController extends Controller
     public function update(Request $request, $slug)
     {
         $project = Project::where('slug', $slug)->firstOrFail();
+
         // Validate Data
         $request->validate($this->validations, $this->validation_messages);
 
         $data = $request->all();
 
-        // Update Data
-        $updated = $project->update([
-            'title'         => $data['title'],
-            'type_id'       => $data['type_id'],
-            'url_image'     => $data['url_image'],
-            'description'   => $data['description'],
-            'creation_date' => $data['creation_date'],
-            'url_repo'      => $data['url_repo']
-        ]);
+        if ($data['image']) {
 
+            // Save new image
+            $imagePath = Storage::put('uploads', $data['image']);
+
+            // If exists, delete previous image
+            if ($project->image) {
+                Storage::delete($project->image);
+            }
+
+            //Update field containing new image
+            $project->image = $imagePath;
+        }
+
+        // Update Data
+        $project->title         = $data['title'];
+        $project->type_id       = $data['type_id'];
+        $project->url_image     = $data['url_image'];
+        $project->description   = $data['description'];
+        $project->creation_date = $data['creation_date'];
+        $project->url_repo      = $data['url_repo'];
+
+        $project->update();
+
+        // Link to Table "technologies"
         $project->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', ['project' => $project])->with('update_success', $project);
@@ -149,16 +172,27 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
+    // Soft Delete project
     public function destroy($slug)
     {
         $project = Project::where('slug', $slug)->firstOrFail();
 
-        // Soft Delete project
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('delete_success', $project);
     }
 
+
+    // Redirect to Trashed view
+    public function trashed()
+    {
+        $projects = Project::onlyTrashed()->paginate(3);
+        return view('admin.projects.trashed', ['projects' => $projects]);
+    }
+
+
+    // Restore Project from Trashed
     public function restore($slug)
     {
         $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
@@ -167,15 +201,16 @@ class ProjectsController extends Controller
         return redirect()->route('admin.projects.trashed')->with('restore_success', $project);
     }
 
-    public function trashed()
-    {
-        $projects = Project::onlyTrashed()->paginate(3);
-        return view('admin.projects.trashed', ['projects' => $projects]);
-    }
 
+    // Force Delete a project
     public function forcedelete($slug)
     {
-        $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
+        $project = Project::onlyTrashed()->where('slug', $slug)->firstOrFail();
+
+        //If exists, delete loaded image
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
 
         // Detach tecnologies from project
         $project->technologies()->detach();
