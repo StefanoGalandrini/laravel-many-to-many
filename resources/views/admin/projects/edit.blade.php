@@ -4,11 +4,10 @@
 	<h1 class="m-0">EDIT PROJECT</h1>
 @endsection
 
-
 @section('contents')
 	<div class="wrapper w-50 mx-auto">
 
-		<form method="POST" action="{{ route('admin.projects.update', $project) }}" novalidate>
+		<form method="POST" action="{{ route('admin.projects.update', $project) }}" enctype="multipart/form-data" novalidate>
 			@csrf
 			@method('PUT')
 
@@ -17,6 +16,19 @@
 				<input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
 					value="{{ old('title', $project->title) }}">
 				@error('title')
+					<div class="invalid-feedback">
+						{{ $message }}
+					</div>
+				@enderror
+			</div>
+
+			{{-- Upload image --}}
+			<p class="mb-2">Load an image</p>
+			<div class="input-group mb-3">
+				<input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
+					accept="image/*">
+				<label class="input-group-text" for="image">Upload</label>
+				@error('image')
 					<div class="invalid-feedback">
 						{{ $message }}
 					</div>
@@ -49,12 +61,6 @@
 						<label class="form-check-label" for="tech{{ $tech->id }}">{{ $tech->name }}</label>
 					</div>
 				@endforeach
-
-				{{-- @error('type_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror --}}
 			</div>
 
 			<div class="mb-3">

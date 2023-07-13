@@ -128,12 +128,14 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        dd($request->all());
         $project = Project::where('slug', $slug)->firstOrFail();
 
         // Validate Data
         $request->validate($this->validations, $this->validation_messages);
 
         $data = $request->all();
+
 
         if ($data['image']) {
 

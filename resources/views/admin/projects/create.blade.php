@@ -62,12 +62,6 @@
 						<label class="form-check-label" for="tech{{ $tech->id }}">{{ $tech->name }}</label>
 					</div>
 				@endforeach
-
-				{{-- @error('type_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror --}}
 			</div>
 
 
