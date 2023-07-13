@@ -128,7 +128,7 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        dd($request->all());
+
         $project = Project::where('slug', $slug)->firstOrFail();
 
         // Validate Data
@@ -137,7 +137,7 @@ class ProjectsController extends Controller
         $data = $request->all();
 
 
-        if ($data['image']) {
+        if ($request->has('image')) {
 
             // Save new image
             $imagePath = Storage::put('uploads', $data['image']);
