@@ -27,23 +27,34 @@
 			</div>
 			<div class="col-12 col-md-8">
 				<div class="card-body">
-					<h2 class="card-title">Project <span class="fst-italic text-uppercase"> "{{ $project->title }}"</span></h2>
-					<h4>- Type: {{ $project->type->name }}</h4>
-					<h5 class="mt-4 fw-light fst-italic">- Technologies:
-						{{ implode(', ', $project->technologies->pluck('name')->all()) }}
-					</h5>
-					<p class="card-text mt-5">Description:</p>
-					<p>{{ $project->description }}</p>
+					<div class="row">
+						{{-- Loaded image --}}
+						@if ($project->image)
+							<div class="col-3">
+								<img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="img-fluid"
+									style="max-width: 80%; height: auto;">
+							</div>
+						@endif
+						<div class="col-{{ $project->image ? '9' : '12' }} border-start ps-3">
+							<h2 class="card-title">Project <span class="fst-italic text-uppercase"> "{{ $project->title }}"</span></h2>
+							<h4>- Type: {{ $project->type->name }}</h4>
+							<h5 class="mt-4 fw-light fst-italic">- Technologies:
+								{{ implode(', ', $project->technologies->pluck('name')->all()) }}
+							</h5>
+							<p class="card-text mt-5">Description:</p>
+							<p>{{ $project->description }}</p>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<p>Created on: {{ \Carbon\Carbon::parse($project->creation_date)->format('d M Y') }}</p>
+								</li>
+								<li class="list-group-item">
+									<p>URL Github</p>
+									<a href="">{{ $project->url_repo }}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">
-						<p>Created on: {{ \Carbon\Carbon::parse($project->creation_date)->format('d M Y') }}</p>
-					</li>
-					<li class="list-group-item">
-						<p>URL Github</p>
-						<a href="">{{ $project->url_repo }}</a>
-					</li>
-				</ul>
 			</div>
 		</div>
 	</div>
