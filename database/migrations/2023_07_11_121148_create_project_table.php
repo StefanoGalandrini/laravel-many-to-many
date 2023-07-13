@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->string('slug', 100)->unique();
             $table->string('url_image', 200);
+            $table->string('image', 200)->nullable();
             $table->text('description');
             $table->date('creation_date');
             $table->string('url_repo', 200);
