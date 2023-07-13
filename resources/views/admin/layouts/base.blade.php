@@ -9,7 +9,7 @@
 	@vite('resources/js/app.js')
 </head>
 
-<body>
+<body class="bg-dark text-white">
 	@include('admin.includes.header')
 
 	<div id="page-title" class="text-center bg-dark text-white py-2">

@@ -39,7 +39,7 @@
 							<td class="fs-4">{{ $type->name }}</td>
 							<td class="fs-15">{{ $type->description }}</td>
 							<td>
-								<a href="{{ route('admin.types.show', ['type' => $type]) }}" class="btn btn-warning btn-sm">Show</a>
+								<a href="{{ route('admin.types.show', ['type' => $type]) }}" class="btn btn-success btn-sm">Show</a>
 								<a href="{{ route('admin.types.edit', ['type' => $type]) }}" class="btn btn-primary btn-sm">Edit</a>
 								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="type" data-bs-toggle="modal"
 									data-bs-target="#deleteModal" data-id="{{ $type->id }}">

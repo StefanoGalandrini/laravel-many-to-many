@@ -15,7 +15,7 @@
 		@endif
 
 		{{-- Trashed projects --}}
-		<a href="{{ route('admin.projects.trashed') }}" class="btn btn-secondary px-3 mb-3">Trashed</a>
+		<a href="{{ route('admin.projects.trashed') }}" class="btn btn-warning px-3 mb-3">Trashed</a>
 
 		{{-- <h1>Projects</h1> --}}
 		<div class="d-flex justify-content-center w-100">
@@ -52,7 +52,7 @@
 							<td>{{ \Carbon\Carbon::parse($project->creation_date)->format('d M Y') }}</td>
 							<td><a href="{{ $project->github_url }}">{{ $project->url_repo }}</a></td>
 							<td>
-								<a href="{{ route('admin.projects.show', ['project' => $project]) }}" class="btn btn-warning btn-sm">Show</a>
+								<a href="{{ route('admin.projects.show', ['project' => $project]) }}" class="btn btn-success btn-sm">Show</a>
 								<a href="{{ route('admin.projects.edit', ['project' => $project]) }}" class="btn btn-primary btn-sm">Edit</a>
 								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="project" data-bs-toggle="modal"
 									data-bs-target="#deleteModal" data-id="{{ $project->slug }}">

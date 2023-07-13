@@ -176,7 +176,6 @@ class ProjectsController extends Controller
     public function forcedelete($slug)
     {
         $project = Project::withTrashed()->where('slug', $slug)->firstOrFail();
-        // dd($project);
 
         // Detach tecnologies from project
         $project->technologies()->detach();

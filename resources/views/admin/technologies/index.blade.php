@@ -30,7 +30,7 @@
 							<td class="fs-8">{{ $technology->name }}</td>
 							<td>
 								<a href="{{ route('admin.technologies.show', ['technology' => $technology]) }}"
-									class="btn btn-warning btn-sm">Show</a>
+									class="btn btn-success btn-sm">Show</a>
 								<a href="{{ route('admin.technologies.edit', ['technology' => $technology]) }}"
 									class="btn btn-primary btn-sm">Edit</a>
 								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="technology" data-bs-toggle="modal"
