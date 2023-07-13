@@ -1,8 +1,8 @@
 @php $user = Auth::user(); @endphp
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary px-5">
-	<div class="container-fluid">
-		<a class="navbar-brand h1" href="{{ route('guests.home') }}">MY PROJECTS</a>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<div class="container-fluid bg-light.bg-gradient shadow w-100 px-5">
+		<a class="navbar-brand h1 text-danger fw-bold me-4" href="{{ route('guests.home') }}">MY PROJECTS</a>
 
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+					<a class="nav-link me-4" href="{{ route('admin.dashboard') }}">Dashboard</a>
 				</li>
 
 
@@ -88,7 +88,8 @@
 
 			<ul class="navbar-nav mb-2 mb-lg-0">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<a class="nav-link dropdown-toggle text-danger fw-bold fs-5" href="#" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false">
 						{{ $user->name }}
 					</a>
 					<ul class="dropdown-menu">

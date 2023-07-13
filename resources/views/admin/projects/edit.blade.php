@@ -108,7 +108,9 @@
 			</div>
 
 
-			<button class="btn btn-success px-5 mt-3">Edit</button>
+			<button class="btn btn-success px-5 mt-3 fs-4"><i class="bi bi-pencil-square"></i> Edit</button>
+			<a href="{{ route('admin.projects.index') }}" class="btn btn-secondary fs-4 ms-4 mt-3"><i
+					class="bi bi-backspace"></i> Cancel</a>
 		</form>
 	</div>
 @endsection

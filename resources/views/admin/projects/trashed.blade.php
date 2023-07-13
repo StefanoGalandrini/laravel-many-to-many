@@ -21,6 +21,9 @@
 				Project "{{ $project->title }}" has been restored
 			</div>
 		@endif
+		{{-- Back to Index --}}
+		<a href="{{ route('admin.projects.index') }}" class="btn btn-primary px-4 mb-3 fs-4"><i class="bi bi-card-list"></i>
+			Index</a>
 
 		{{-- <h1>Projects</h1> --}}
 		<div class="d-flex justify-content-center w-100">
@@ -61,14 +64,14 @@
 								<form action="{{ route('admin.projects.restore', ['slug' => $project->slug]) }}" method="post"
 									class="d-inline-block">
 									@csrf
-									<button type="submit" class="btn btn-primary btn-sm">
+									<button type="submit" class="btn btn-primary btn-sm fs-6">
 										Restore
 									</button>
 								</form>
 
 								<!-- Destroy Button with Modal -->
-								<button type="button" class="btn btn-danger btn-sm js-delete" data-resource="project" data-bs-toggle="modal"
-									data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
+								<button type="button" class="btn btn-danger btn-sm js-delete fs-6" data-resource="project"
+									data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
 									Destroy
 								</button>
 							</td>

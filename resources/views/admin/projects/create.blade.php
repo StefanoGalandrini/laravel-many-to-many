@@ -110,7 +110,9 @@
 			</div>
 
 
-			<button class="btn btn-primary">Create</button>
+			<button class="btn btn-info fs-4"><i class="bi bi-clipboard-check"></i> Create</button>
+			<a href="{{ route('admin.projects.index') }}" class="btn btn-secondary fs-4 ms-4"><i class="bi bi-backspace"></i>
+				Cancel</a>
 		</form>
 	</div>
 @endsection
