@@ -136,7 +136,7 @@ class ProjectsController extends Controller
 
         $data = $request->all();
 
-
+        // Check if 'image' exists in update request
         if ($request->has('image')) {
 
             // Save new image
