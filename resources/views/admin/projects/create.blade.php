@@ -7,7 +7,7 @@
 @section('contents')
 	<div class="wrapper w-50 mx-auto">
 
-		<form method="POST" action="{{ route('admin.projects.store') }}" novalidate>
+		<form method="POST" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data" novalidate>
 			@csrf
 
 			<div class="mb-3">
@@ -20,6 +20,21 @@
 					</div>
 				@enderror
 			</div>
+
+
+			{{-- Upload image --}}
+			<p class="mb-2">Load an image</p>
+			<div class="input-group mb-3">
+				<input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
+					accept="image/*">
+				<label class="input-group-text" for="image">Upload</label>
+				@error('image')
+					<div class="invalid-feedback">
+						{{ $message }}
+					</div>
+				@enderror
+			</div>
+
 
 			{{-- Add input select for types of projects --}}
 			<div class="mb-3">
