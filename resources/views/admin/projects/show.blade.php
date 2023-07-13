@@ -21,13 +21,14 @@
 
 	<div class="card mx-auto rounded">
 		<div class="row no-gutters">
-			<div class="col-12 col-md-4">
-				<img src="{{ $project->url_image }}" alt="{{ $project->title }}" class="card-img img-fluid"
-					style="max-width: 80%; height: auto;">
+			<div class="col-12 col-md-4 d-flex align-items-center justify-content-center" style="">
+				<img src="{{ $project->url_image }}" alt="{{ $project->title }}" class="ms-4 shadow img-fluid"
+					style="max-width: 100%; max-height: 100%; object-fit: contain;">
 			</div>
+
 			<div class="col-12 col-md-8">
 				<div class="card-body">
-					<div class="row">
+					<div class="row border-start ps-3">
 						{{-- Loaded image --}}
 						@if ($project->image)
 							<div class="col-3">
@@ -35,7 +36,7 @@
 									style="max-width: 80%; height: auto;">
 							</div>
 						@endif
-						<div class="col-{{ $project->image ? '9' : '12' }} border-start ps-3">
+						<div class="col-{{ $project->image ? '9' : '12' }}">
 							<h2 class="card-title">Project <span class="fst-italic text-uppercase"> "{{ $project->title }}"</span></h2>
 							<h4>- Type: {{ $project->type->name }}</h4>
 							<h5 class="mt-4 fw-light fst-italic">- Technologies:

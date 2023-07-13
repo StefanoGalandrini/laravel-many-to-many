@@ -15,7 +15,7 @@
 		@endif
 
 		{{-- Trashed projects --}}
-		<a href="{{ route('admin.projects.trashed') }}" class="btn btn-warning px-3 mb-3">Trashed</a>
+		<a href="{{ route('admin.projects.trashed') }}" class="btn btn-warning px-4 mb-3">Trashed</a>
 
 		{{-- <h1>Projects</h1> --}}
 		<div class="d-flex justify-content-center w-100">
@@ -25,10 +25,10 @@
 						<th>Title</th>
 						<th>Type</th>
 						<th>Image</th>
-						<th class="w-25">Technologies</th>
+						<th>Technologies</th>
 						<th>Creation Date</th>
-						<th class="w-15">Github URL</th>
-						<th>Actions</th>
+						<th>Github URL</th>
+						<th class="w-15">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +39,7 @@
 								<a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ $project->type->name }}
 								</a>
 							</td>
-							<td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 120px;">
+							<td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 150px;">
 							</td>
 							{{-- <td class="mt-4 fw-light fst-italic">{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td> --}}
 							<td class="mt-4 fw-light fst-italic">
