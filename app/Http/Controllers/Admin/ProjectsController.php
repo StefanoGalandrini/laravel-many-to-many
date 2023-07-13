@@ -40,7 +40,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(3);
+        $projects = Project::paginate(4);
         return view('admin.projects.index', ['projects' => $projects]);
     }
 
@@ -189,7 +189,7 @@ class ProjectsController extends Controller
     // Redirect to Trashed view
     public function trashed()
     {
-        $projects = Project::onlyTrashed()->paginate(3);
+        $projects = Project::onlyTrashed()->paginate(4);
         return view('admin.projects.trashed', ['projects' => $projects]);
     }
 
